@@ -1,7 +1,7 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:protofilio/Screens/main_scren.dart';
+import 'package:protofilio/Features/Navigation/main_scren.dart';
 import 'package:protofilio/core/services/perfrence_manager.dart';
 import 'package:protofilio/core/widgets/custome_button.dart';
 import 'package:protofilio/core/widgets/custome_svg.dart';

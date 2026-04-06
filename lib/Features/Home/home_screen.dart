@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:protofilio/Models/task_model.dart';
-import 'package:protofilio/Screens/add_task_Screen.dart';
+import 'package:protofilio/Features/Add_Task/add_task_Screen.dart';
 import 'package:protofilio/core/services/perfrence_manager.dart';
 import 'package:protofilio/core/widgets/archived_task_widget.dart';
 import 'package:protofilio/core/widgets/custome_svg.dart';

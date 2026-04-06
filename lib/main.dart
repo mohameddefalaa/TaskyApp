@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:protofilio/Screens/main_scren.dart';
-import 'package:protofilio/Screens/welcome_screen.dart';
+import 'package:protofilio/Features/Navigation/main_scren.dart';
+import 'package:protofilio/Features/Welcome/welcome_screen.dart';
 import 'package:protofilio/core/services/perfrence_manager.dart';
 import 'package:protofilio/theme/dark_theme.dart';
 import 'package:protofilio/theme/light_theme.dart';

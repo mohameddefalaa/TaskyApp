@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:protofilio/Screens/Profile_Screen.dart';
-import 'package:protofilio/Screens/cpmpleated_screen.dart';
-import 'package:protofilio/Screens/home_screen.dart';
-import 'package:protofilio/Screens/todo_screen.dart';
+import 'package:protofilio/Features/Profile/Profile_Screen.dart';
+import 'package:protofilio/Features/Tasks/cpmpleated_screen.dart';
+import 'package:protofilio/Features/Home/home_screen.dart';
+import 'package:protofilio/Features/Tasks/todo_screen.dart';
 import 'package:protofilio/Shared/colors.dart';
 
 class MainScren extends StatefulWidget {
