@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:protofilio/Features/Navigation/main_scren.dart';
 import 'package:protofilio/Features/Welcome/welcome_screen.dart';
+import 'package:protofilio/core/constants/storge_key.dart';
 import 'package:protofilio/core/services/perfrence_manager.dart';
 import 'package:protofilio/theme/dark_theme.dart';
 import 'package:protofilio/theme/light_theme.dart';
@@ -10,7 +11,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PerfrenceManager().init();
   ThemeController().init();
-  String? username = PerfrenceManager().getstring("Full Name");
+  String? username = PerfrenceManager().getstring(StorgeKey.username);
   runApp(TaskyApp(username: username));
 }
 

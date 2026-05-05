@@ -7,7 +7,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:protofilio/Features/Profile/user_detailes.dart';
 import 'package:protofilio/Features/Welcome/welcome_screen.dart';
-import 'package:protofilio/Shared/colors.dart';
+import 'package:protofilio/core/constants/storge_key.dart';
+import 'package:protofilio/theme/colors.dart';
 import 'package:protofilio/core/services/perfrence_manager.dart';
 import 'package:protofilio/theme/theme_controller.dart';
 
@@ -164,7 +165,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   FocusManager.instance.primaryFocus?.unfocus();
                   //   final pref = await SharedPreferences.getInstance();
                   PerfrenceManager().remove('bio');
-                  PerfrenceManager().remove('Full Name');
+                  PerfrenceManager().remove(StorgeKey.username);
                   PerfrenceManager().remove('taasksData');
                   PerfrenceManager().remove('image');
 
@@ -196,7 +197,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   void getfullname() async {
     //final pref = await SharedPreferences.getInstance();
-    finalname = PerfrenceManager().getstring('Full Name');
+    finalname = PerfrenceManager().getstring(StorgeKey.username);
     finalbio =
         PerfrenceManager().getstring('bio') ??
         "One task at a time. One step closer.";

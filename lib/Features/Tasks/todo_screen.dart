@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:protofilio/Models/task_model.dart';
-import 'package:protofilio/Shared/colors.dart';
+import 'package:protofilio/theme/colors.dart';
 import 'package:protofilio/core/services/perfrence_manager.dart';
-import 'package:protofilio/core/widgets/task_check_list.dart';
-import 'package:protofilio/core/widgets/task_item.dart';
+import 'package:protofilio/core/components/task_check_list.dart';
+import 'package:protofilio/core/components/task_item.dart';
 
 class TodoScreen extends StatefulWidget {
   const TodoScreen({super.key /*required this.Todo*/});

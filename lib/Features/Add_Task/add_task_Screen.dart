@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:protofilio/Models/task_model.dart';
-import 'package:protofilio/Shared/colors.dart';
+import 'package:protofilio/theme/colors.dart';
 import 'package:protofilio/core/services/perfrence_manager.dart';
 import 'package:protofilio/core/widgets/custome_button.dart';
-import 'package:protofilio/core/widgets/custome_card.dart';
+import 'package:protofilio/Features/Profile/widgets/custome_card.dart';
 import 'package:protofilio/core/widgets/custome_text_filed.dart';
 import 'package:protofilio/theme/dark_theme.dart';
 

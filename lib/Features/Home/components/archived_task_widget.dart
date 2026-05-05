@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:protofilio/Models/task_model.dart';
-import 'package:protofilio/Shared/colors.dart';
+import 'package:protofilio/theme/colors.dart';
 
 class ArchivedTask extends StatelessWidget {
   const ArchivedTask({

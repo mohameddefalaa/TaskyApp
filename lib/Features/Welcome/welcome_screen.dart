@@ -2,9 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:protofilio/Features/Navigation/main_scren.dart';
+import 'package:protofilio/core/constants/storge_key.dart';
 import 'package:protofilio/core/services/perfrence_manager.dart';
 import 'package:protofilio/core/widgets/custome_button.dart';
-import 'package:protofilio/core/widgets/custome_svg.dart';
+import 'package:protofilio/Features/Home/components/custome_svg.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -96,7 +97,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   Align(
                     alignment: AlignmentGeometry.centerLeft,
                     child: Text(
-                      "Full Name",
+                      StorgeKey.username,
                       style: TextTheme.of(context).titleMedium,
                     ),
                   ),
@@ -119,7 +120,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     onPressed: () async {
                       if (_namekey.currentState?.validate() ?? false) {
                         PerfrenceManager().setstring(
-                          'Full Name',
+                          StorgeKey.username,
                           nameController.value.text,
                         );
                         Navigator.replace(

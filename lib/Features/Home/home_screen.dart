@@ -7,11 +7,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:protofilio/Models/task_model.dart';
 import 'package:protofilio/Features/Add_Task/add_task_Screen.dart';
+import 'package:protofilio/core/constants/storge_key.dart';
 import 'package:protofilio/core/services/perfrence_manager.dart';
-import 'package:protofilio/core/widgets/archived_task_widget.dart';
-import 'package:protofilio/core/widgets/custome_svg.dart';
-import 'package:protofilio/core/widgets/highpreprityt_task_widget.dart';
-import 'package:protofilio/core/widgets/task_item.dart';
+import 'package:protofilio/Features/Home/components/archived_task_widget.dart';
+import 'package:protofilio/Features/Home/components/custome_svg.dart';
+import 'package:protofilio/Features/Home/components/highpreprityt_task_widget.dart';
+import 'package:protofilio/core/components/task_item.dart';
 import 'package:protofilio/theme/theme_controller.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -370,7 +371,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void getfullname() async {
     // final pref = await SharedPreferences.getInstance();
-    finalname = PerfrenceManager().getstring('Full Name');
+    finalname = PerfrenceManager().getstring(StorgeKey.username);
     finalbio =
         PerfrenceManager().getstring('bio') ??
         "One task at a time. One step closer.";

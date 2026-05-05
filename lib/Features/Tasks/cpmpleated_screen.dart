@@ -3,9 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:protofilio/Models/task_model.dart';
 import 'package:protofilio/core/services/perfrence_manager.dart';
-import 'package:protofilio/core/widgets/custome_app_bar.dart';
-import 'package:protofilio/core/widgets/task_check_list.dart';
-import 'package:protofilio/core/widgets/task_item.dart';
+import 'package:protofilio/core/components/task_item.dart';
 
 class CompleatedScreen extends StatefulWidget {
   const CompleatedScreen({super.key});
@@ -43,7 +41,7 @@ class _CompleatedScreenState extends State<CompleatedScreen> {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        CustomeSliverAppBar(appBarTitle: 'Compleated Tasks'),
+        SliverAppBar(title: Text('Compleated Tasks')),
         SliverList.builder(
           itemCount: compleatedTaska.length,
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:protofilio/Shared/colors.dart';
+import 'package:protofilio/core/constants/storge_key.dart';
+import 'package:protofilio/theme/colors.dart';
 import 'package:protofilio/core/services/perfrence_manager.dart';
 import 'package:protofilio/core/widgets/custome_button.dart';
 import 'package:protofilio/core/widgets/custome_text_filed.dart';
@@ -94,7 +95,7 @@ class _UserDetailesState extends State<UserDetailes> {
 
   void getfullname() async {
     //  final pref = await SharedPreferences.getInstance();
-    finalName = PerfrenceManager().getstring('Full Name');
+    finalName = PerfrenceManager().getstring(StorgeKey.username);
     bio =
         PerfrenceManager().getstring('bio') ??
         "One task at a time. One step closer.";
@@ -115,7 +116,7 @@ class _UserDetailesState extends State<UserDetailes> {
     // final pref = await SharedPreferences.getInstance();
     await PerfrenceManager().setstring("bio", biocontroller.value.text);
     await PerfrenceManager().setstring(
-      'Full Name',
+      StorgeKey.username,
       userNameController.value.text,
     );
   }

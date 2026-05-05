@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:protofilio/Shared/colors.dart';
+import 'package:protofilio/theme/colors.dart';
 
 class CustomeSvg extends StatelessWidget {
   const CustomeSvg({

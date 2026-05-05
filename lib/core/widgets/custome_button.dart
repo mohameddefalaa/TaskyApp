@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:protofilio/Shared/colors.dart';
+import 'package:protofilio/theme/colors.dart';
 
 class CustomeButton extends StatelessWidget {
   const CustomeButton({
