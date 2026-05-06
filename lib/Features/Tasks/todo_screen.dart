@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:protofilio/Models/task_model.dart';
+import 'package:protofilio/core/constants/storge_key.dart';
 import 'package:protofilio/theme/colors.dart';
 import 'package:protofilio/core/services/perfrence_manager.dart';
 import 'package:protofilio/core/components/task_check_list.dart';
@@ -28,7 +29,7 @@ class _TodoScreenState extends State<TodoScreen> {
 
   Future<void> gettaskname() async {
     //final pref = await SharedPreferences.getInstance();
-    final decodingTask = PerfrenceManager().getstring("taasksData");
+    final decodingTask = PerfrenceManager().getstring(StorgeKey.tasksdata);
     if (decodingTask != null) {
       final finalDecodingTask = jsonDecode(decodingTask) as List<dynamic>;
       var allTasks = finalDecodingTask.map((toElement) {
@@ -61,7 +62,7 @@ class _TodoScreenState extends State<TodoScreen> {
                     model: noDonetask,
                     onDelete: (id) async {
                       final alldata = PerfrenceManager().getstring(
-                        'taasksData',
+                        StorgeKey.tasksdata,
                       );
                       if (alldata != null) {
                         final data = jsonDecode(alldata) as List<dynamic>;
@@ -74,7 +75,7 @@ class _TodoScreenState extends State<TodoScreen> {
                             .map((e) => e.toJson())
                             .toList();
                         await PerfrenceManager().setstring(
-                          'taasksData',
+                          StorgeKey.tasksdata,
                           jsonEncode(updeatedData),
                         );
                         gettaskname();
@@ -86,7 +87,9 @@ class _TodoScreenState extends State<TodoScreen> {
                         noDonetask.iSDONE = value ?? false;
                       });
                       //       final pref = await SharedPreferences.getInstance();
-                      final data = PerfrenceManager().getstring('taasksData');
+                      final data = PerfrenceManager().getstring(
+                        StorgeKey.tasksdata,
+                      );
                       if (data != null) {
                         final alljson = jsonDecode(data) as List<dynamic>;
                         List<dynamic> allTasks = alljson
@@ -102,7 +105,7 @@ class _TodoScreenState extends State<TodoScreen> {
                               .map((e) => e.toMap())
                               .toList();
                           await PerfrenceManager().setstring(
-                            'taasksData',
+                            StorgeKey.tasksdata,
                             jsonEncode(jsonUpdate),
                           );
 
@@ -149,7 +152,7 @@ class _TodoScreenState extends State<TodoScreen> {
       //                   noDonetask.iSDONE = value ?? false;
       //                 });
       //                 final pref = await SharedPreferences.getInstance();
-      //                 final data = pref.getString('taasksData');
+      //                 final data = pref.getString(StorgeKey.tasksdata);
       //                 if (data != null) {
       //                   final alljson = jsonDecode(data) as List<dynamic>;
       //                   List<dynamic> allTasks = alljson
@@ -165,7 +168,7 @@ class _TodoScreenState extends State<TodoScreen> {
       //                         .map((e) => e.toMap())
       //                         .toList();
       //                     await pref.setString(
-      //                       'taasksData',
+      //                       StorgeKey.tasksdata,
       //                       jsonEncode(jsonUpdate),
       //                     );
 

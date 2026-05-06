@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:protofilio/Models/task_model.dart';
+import 'package:protofilio/core/constants/storge_key.dart';
 import 'package:protofilio/core/services/perfrence_manager.dart';
 import 'package:protofilio/core/components/task_item.dart';
 
@@ -23,7 +24,7 @@ class _CompleatedScreenState extends State<CompleatedScreen> {
 
   Future<void> loadtasks() async {
     // final pref = await SharedPreferences.getInstance();
-    final String? tasks = PerfrenceManager().getstring('taasksData');
+    final String? tasks = PerfrenceManager().getstring(StorgeKey.tasksdata);
     if (tasks != null) {
       List<dynamic> tasksDecode = jsonDecode(tasks);
       final alltasksdecode = tasksDecode
@@ -54,7 +55,9 @@ class _CompleatedScreenState extends State<CompleatedScreen> {
               },
               onDelete: (id) async {
                 compleatedTaska.removeWhere((task) => task.id == id);
-                final alldata = PerfrenceManager().getstring('taasksData');
+                final alldata = PerfrenceManager().getstring(
+                  StorgeKey.tasksdata,
+                );
                 if (alldata != null) {
                   final alljsondata = jsonDecode(alldata) as List<dynamic>;
                   final List<dynamic> completeTasksList = alljsondata
@@ -63,7 +66,7 @@ class _CompleatedScreenState extends State<CompleatedScreen> {
                   completeTasksList.removeWhere((e) => e.id == id);
 
                   await PerfrenceManager().setstring(
-                    'taasksData',
+                    StorgeKey.tasksdata,
                     jsonEncode(completeTasksList),
                   );
                   loadtasks();
@@ -80,7 +83,7 @@ class _CompleatedScreenState extends State<CompleatedScreen> {
                 //     final pref =
                 // await SharedPreferences.getInstance(); //هات نسخة من الشيرد
                 final String? allEncodeDdata = PerfrenceManager().getstring(
-                  'taasksData',
+                  StorgeKey.tasksdata,
                 ); // هات كل التاسكات المسجلة
                 if (allEncodeDdata != null) {
                   // بنتأكد ان القيمة مش فاضية
@@ -103,7 +106,7 @@ class _CompleatedScreenState extends State<CompleatedScreen> {
                         .map((e) => e.toMap())
                         .toList(); //بشفر القايمة بعد التحخديث
                     await PerfrenceManager().setstring(
-                      'taasksData',
+                      StorgeKey.tasksdata,
                       jsonEncode(jsonUpdate),
                     ); // بخزن القيمة المشفرة في الشيرد 1
                     loadtasks(); // بستدعي القايمة بعد  التحخديث

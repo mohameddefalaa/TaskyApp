@@ -97,7 +97,7 @@ class _UserDetailesState extends State<UserDetailes> {
     //  final pref = await SharedPreferences.getInstance();
     finalName = PerfrenceManager().getstring(StorgeKey.username);
     bio =
-        PerfrenceManager().getstring('bio') ??
+        PerfrenceManager().getstring(StorgeKey.bio) ??
         "One task at a time. One step closer.";
     if (!mounted) return;
     setState(() {
@@ -114,7 +114,7 @@ class _UserDetailesState extends State<UserDetailes> {
 
   Future<void> savenewdata() async {
     // final pref = await SharedPreferences.getInstance();
-    await PerfrenceManager().setstring("bio", biocontroller.value.text);
+    await PerfrenceManager().setstring(StorgeKey.bio, biocontroller.value.text);
     await PerfrenceManager().setstring(
       StorgeKey.username,
       userNameController.value.text,

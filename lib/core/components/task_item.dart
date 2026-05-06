@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:protofilio/Models/task_model.dart';
+import 'package:protofilio/core/constants/storge_key.dart';
 import 'package:protofilio/theme/colors.dart';
 import 'package:protofilio/core/enumes/popmenueenumactions.dart';
 import 'package:protofilio/core/services/perfrence_manager.dart';
@@ -277,7 +278,7 @@ class TaskItem extends StatelessWidget {
                         if (key.currentState?.validate() ?? false) {
                           //    final pref = await SharedPreferences.getInstance();
                           final jsonlist = PerfrenceManager().getstring(
-                            'taasksData',
+                            StorgeKey.tasksdata,
                           );
                           List<dynamic> taskslist = [];
                           if (jsonlist != null) {
@@ -300,7 +301,7 @@ class TaskItem extends StatelessWidget {
                           final dynamic taasksData = jsonEncode(taskslist);
 
                           await PerfrenceManager().setstring(
-                            "taasksData",
+                            StorgeKey.tasksdata,
                             taasksData,
                           );
                           if (context.mounted) {

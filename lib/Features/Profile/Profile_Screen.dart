@@ -164,10 +164,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 onPressed: () async {
                   FocusManager.instance.primaryFocus?.unfocus();
                   //   final pref = await SharedPreferences.getInstance();
-                  PerfrenceManager().remove('bio');
+                  PerfrenceManager().remove(StorgeKey.bio);
                   PerfrenceManager().remove(StorgeKey.username);
-                  PerfrenceManager().remove('taasksData');
-                  PerfrenceManager().remove('image');
+                  PerfrenceManager().remove(StorgeKey.tasksdata);
+                  PerfrenceManager().remove(StorgeKey.userImage);
 
                   await Future.delayed(const Duration(milliseconds: 200));
                   if (context.mounted) {
@@ -199,14 +199,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
     //final pref = await SharedPreferences.getInstance();
     finalname = PerfrenceManager().getstring(StorgeKey.username);
     finalbio =
-        PerfrenceManager().getstring('bio') ??
+        PerfrenceManager().getstring(StorgeKey.bio) ??
         "One task at a time. One step closer.";
     setState(() {});
   }
 
   void getimage() {
     setState(() {
-      String? imagepath = PerfrenceManager().getstring('image');
+      String? imagepath = PerfrenceManager().getstring(StorgeKey.userImage);
       if (imagepath != null && imagepath.isNotEmpty && imagepath != 'null') {
         userImage = (imagepath);
       } else {
@@ -273,6 +273,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   saveimage(XFile file) async {
     final Directory appDir = await getApplicationDocumentsDirectory();
     final newfile = await File(file.path).copy('${appDir.path}/${file.name}');
-    await PerfrenceManager().setstring('image', newfile.path);
+    await PerfrenceManager().setstring(StorgeKey.userImage, newfile.path);
   }
 }

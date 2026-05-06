@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:protofilio/Features/Home/components/home_controller.dart';
 import 'package:protofilio/Models/task_model.dart';
 import 'package:protofilio/Features/Add_Task/add_task_Screen.dart';
+import 'package:protofilio/core/constants/storge_key.dart';
 import 'package:protofilio/core/services/perfrence_manager.dart';
 import 'package:protofilio/Features/Home/components/archived_task_widget.dart';
 import 'package:protofilio/Features/Home/components/custome_svg.dart';
@@ -187,7 +188,7 @@ class HomeScreen extends StatelessWidget {
                                     (e) => e.id == id,
                                   );
                                   final allData = PerfrenceManager().getstring(
-                                    'taasksData',
+                                    StorgeKey.tasksdata,
                                   );
                                   if (allData != null) {
                                     final alljsondata =
@@ -202,7 +203,7 @@ class HomeScreen extends StatelessWidget {
                                     );
 
                                     await PerfrenceManager().setstring(
-                                      'taasksData',
+                                      StorgeKey.tasksdata,
                                       jsonEncode(highPreiortyTaskslIST),
                                     );
                                   }
@@ -248,7 +249,7 @@ class HomeScreen extends StatelessWidget {
                                     .map((elemnt) => elemnt.toJson())
                                     .toList();
                                 await PerfrenceManager().setstring(
-                                  'taasksData',
+                                  StorgeKey.tasksdata,
                                   jsonEncode(jsonupdate),
                                 );
 

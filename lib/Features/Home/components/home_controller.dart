@@ -27,7 +27,7 @@ class HomeController with ChangeNotifier {
   }
 
   void getimage() {
-    String? imagepath = PerfrenceManager().getstring('image');
+    String? imagepath = PerfrenceManager().getstring(StorgeKey.userImage);
     if (imagepath != null && imagepath.isNotEmpty && imagepath != 'null') {
       selectedimage = File(imagepath);
     } else {
@@ -40,7 +40,7 @@ class HomeController with ChangeNotifier {
     // final pref = await SharedPreferences.getInstance();
     finalname = PerfrenceManager().getstring(StorgeKey.username);
     finalbio =
-        PerfrenceManager().getstring('bio') ??
+        PerfrenceManager().getstring(StorgeKey.bio) ??
         "One task at a time. One step closer.";
     notifyListeners();
   }
@@ -54,13 +54,16 @@ class HomeController with ChangeNotifier {
     }
 
     final jsonUpdate = allDataTaska.map((e) => e.toJson()).toList();
-    await PerfrenceManager().setstring('taasksData', jsonEncode(jsonUpdate));
+    await PerfrenceManager().setstring(
+      StorgeKey.tasksdata,
+      jsonEncode(jsonUpdate),
+    );
     notifyListeners();
   }
 
   Future<void> gettaskname() async {
     //final pref = await SharedPreferences.getInstance();
-    final decodingTask = PerfrenceManager().getstring('taasksData');
+    final decodingTask = PerfrenceManager().getstring(StorgeKey.tasksdata);
     //final decodingTask = pref.getString("taasksData");
     if (decodingTask != null) {
       final finalDecodingTask = jsonDecode(decodingTask) as List<dynamic>;
