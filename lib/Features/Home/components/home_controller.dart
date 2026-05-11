@@ -15,6 +15,7 @@ class HomeController with ChangeNotifier {
   List<TaskModel> compleatedtasks = [];
   List<TaskModel> allDataTaska = [];
   File? selectedimage;
+  bool isdone = false;
 
   int selescteindex = 0;
   int totalTasks = 0;
@@ -95,5 +96,16 @@ class HomeController with ChangeNotifier {
 
     // اللوجيك الخاص بالحفظ والنسبة موجود بالفعل في هذه الدالة عندك
     calculatepercentage();
+  }
+
+  void deleteTask(int id) async {
+    allDataTaska.removeWhere((task) => task.id == id);
+    compleatedtasks.removeWhere((task) => task.id == id);
+    highPriorityTasksList.removeWhere((task) => task.id == id);
+    calculatepercentage(); // هيحفظ ويعمل notifyListeners تلقائي ✅
+  }
+
+  void refreshTasks() {
+    gettaskname(); // إعادة جلب البيانات من الـ Preference
   }
 }

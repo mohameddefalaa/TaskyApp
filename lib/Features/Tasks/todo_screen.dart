@@ -1,191 +1,113 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:protofilio/Models/task_model.dart';
-import 'package:protofilio/core/constants/storge_key.dart';
-import 'package:protofilio/theme/colors.dart';
-import 'package:protofilio/core/services/perfrence_manager.dart';
-import 'package:protofilio/core/components/task_check_list.dart';
+import 'package:protofilio/Features/Tasks/tasks_controller.dart';
 import 'package:protofilio/core/components/task_item.dart';
+import 'package:provider/provider.dart';
 
-class TodoScreen extends StatefulWidget {
-  const TodoScreen({super.key /*required this.Todo*/});
-
-  @override
-  State<TodoScreen> createState() => _TodoScreenState();
-}
-
-class _TodoScreenState extends State<TodoScreen> {
-  List<TaskModel> highPriorityTasksList = [];
-  List<TaskModel> normalTasksList = [];
-  List<TaskModel> newTodoList = [];
-  @override
-  void initState() {
-    gettaskname();
-
-    super.initState();
-  }
-
-  Future<void> gettaskname() async {
-    //final pref = await SharedPreferences.getInstance();
-    final decodingTask = PerfrenceManager().getstring(StorgeKey.tasksdata);
-    if (decodingTask != null) {
-      final finalDecodingTask = jsonDecode(decodingTask) as List<dynamic>;
-      var allTasks = finalDecodingTask.map((toElement) {
-        return TaskModel.fromjson(toElement);
-      }).toList();
-      setState(() {
-        newTodoList = allTasks
-            .where((elemnt) => elemnt.iSDONE == false)
-            .toList();
-      });
-    }
-  }
+class TodoScreen extends StatelessWidget {
+  const TodoScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        SliverAppBar(title: Text("Todo Tasks")),
-        newTodoList.isNotEmpty
-            ? SliverList.builder(
-                itemCount: newTodoList.length,
+    return ChangeNotifierProvider<TasksController>(
+      create: (BuildContext context) {
+        return TasksController()..init();
+      },
+      builder: (context, child) {
+        final controller = context.watch<TasksController>();
+        return CustomScrollView(
+          slivers: [
+            SliverAppBar(title: Text("Todo Tasks")),
+            controller.todoTasksListdata.isNotEmpty
+                ? SliverList.builder(
+                    itemCount: controller.todoTasksListdata.length,
 
-                itemBuilder: (context, index) {
-                  final noDonetask = newTodoList[index];
+                    itemBuilder: (context, index) {
+                      final noDonetask = controller.todoTasksListdata[index];
 
-                  return TaskItem(
-                    onEdite: () {
-                      gettaskname();
-                    },
-                    model: noDonetask,
-                    onDelete: (id) async {
-                      final alldata = PerfrenceManager().getstring(
-                        StorgeKey.tasksdata,
+                      return TaskItem(
+                        model: noDonetask,
+                        onToggel: (bool? val) {
+                          controller.toggleTaskStatus(noDonetask, val!);
+                        },
+                        onDelete: (int? id) {
+                          controller.deleteTask(noDonetask.id);
+                        },
+                        onEdite: () {
+                          controller.refreshTasks();
+                        },
                       );
-                      if (alldata != null) {
-                        final data = jsonDecode(alldata) as List<dynamic>;
-                        final List<TaskModel> allTasksList = data
-                            .map((task) => TaskModel.fromjson(task))
-                            .toList();
-                        allTasksList.removeWhere((task) => task.id == id);
-
-                        final updeatedData = allTasksList
-                            .map((e) => e.toJson())
-                            .toList();
-                        await PerfrenceManager().setstring(
-                          StorgeKey.tasksdata,
-                          jsonEncode(updeatedData),
-                        );
-                        gettaskname();
-                      }
                     },
-                    isdone: noDonetask.iSDONE,
-                    onchange: (value) async {
-                      setState(() {
-                        noDonetask.iSDONE = value ?? false;
-                      });
-                      //       final pref = await SharedPreferences.getInstance();
-                      final data = PerfrenceManager().getstring(
-                        StorgeKey.tasksdata,
-                      );
-                      if (data != null) {
-                        final alljson = jsonDecode(data) as List<dynamic>;
-                        List<dynamic> allTasks = alljson
-                            .map((e) => TaskModel.fromjson(e))
-                            .toList();
-                        int currentindex = allTasks.indexWhere(
-                          (task) => task.id == noDonetask.id,
-                        );
-                        if (currentindex != -1) {
-                          allTasks[currentindex].iSDONE = noDonetask.iSDONE;
-
-                          final jsonUpdate = allTasks
-                              .map((e) => e.toMap())
-                              .toList();
-                          await PerfrenceManager().setstring(
-                            StorgeKey.tasksdata,
-                            jsonEncode(jsonUpdate),
-                          );
-
-                          gettaskname();
-                        }
-                      }
-                    },
-                    taskDesc: noDonetask.taskDesc,
-                    taskTitle: noDonetask.taskName,
-                  );
-                },
-              )
-            : SliverFillRemaining(
-                // تم التعديل هنا
-                hasScrollBody:
-                    false, // لضمان عدم حدوث مشاكل في التمرير إذا كان المحتوى صغيراً
-                child: Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(20.0),
-                    child: Text(
-                      'No Tasks or maybe You have finished it',
-                      textAlign: TextAlign
-                          .center, // لضمان توسيط الأسطر إذا كان النص طويلاً
-                      style: TextTheme.of(context).titleLarge,
+                  )
+                : SliverFillRemaining(
+                    // تم التعديل هنا
+                    hasScrollBody:
+                        false, // لضمان عدم حدوث مشاكل في التمرير إذا كان المحتوى صغيراً
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(20.0),
+                        child: Text(
+                          'No Tasks or maybe You have finished it',
+                          textAlign: TextAlign
+                              .center, // لضمان توسيط الأسطر إذا كان النص طويلاً
+                          style: TextTheme.of(context).titleLarge,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-      ],
+          ],
 
-      //  Column(
-      //     crossAxisAlignment: CrossAxisAlignment.start,
-      //     children: [
-      //       Padding(
-      //         padding: const EdgeInsets.all(8.0),
-      //         child: ListView.builder(
-      //           itemBuilder: (context, index) {
-      //             final noDonetask = newTodoList[index];
+          //  Column(
+          //     crossAxisAlignment: CrossAxisAlignment.start,
+          //     children: [
+          //       Padding(
+          //         padding: const EdgeInsets.all(8.0),
+          //         child: ListView.builder(
+          //           itemBuilder: (context, index) {
+          //             final noDonetask = newTodoList[index];
 
-      //             return TaskItem(
-      //               isdone: noDonetask.iSDONE,
-      //               onchange: (value) async {
-      //                 setState(() {
-      //                   noDonetask.iSDONE = value ?? false;
-      //                 });
-      //                 final pref = await SharedPreferences.getInstance();
-      //                 final data = pref.getString(StorgeKey.tasksdata);
-      //                 if (data != null) {
-      //                   final alljson = jsonDecode(data) as List<dynamic>;
-      //                   List<dynamic> allTasks = alljson
-      //                       .map((e) => TaskModel.fromjson(e))
-      //                       .toList();
-      //                   int currentindex = allTasks.indexWhere(
-      //                     (task) => task.id == noDonetask.id,
-      //                   );
-      //                   if (currentindex != -1) {
-      //                     allTasks[currentindex].iSDONE = noDonetask.iSDONE;
+          //             return TaskItem(
+          //               isdone: noDonetask.iSDONE,
+          //               onchange: (value) async {
+          //                 setState(() {
+          //                   noDonetask.iSDONE = value ?? false;
+          //                 });
+          //                 final pref = await SharedPreferences.getInstance();
+          //                 final data = pref.getString(StorgeKey.tasksdata);
+          //                 if (data != null) {
+          //                   final alljson = jsonDecode(data) as List<dynamic>;
+          //                   List<dynamic> allTasks = alljson
+          //                       .map((e) => TaskModel.fromjson(e))
+          //                       .toList();
+          //                   int currentindex = allTasks.indexWhere(
+          //                     (task) => task.id == noDonetask.id,
+          //                   );
+          //                   if (currentindex != -1) {
+          //                     allTasks[currentindex].iSDONE = noDonetask.iSDONE;
 
-      //                     final jsonUpdate = allTasks
-      //                         .map((e) => e.toMap())
-      //                         .toList();
-      //                     await pref.setString(
-      //                       StorgeKey.tasksdata,
-      //                       jsonEncode(jsonUpdate),
-      //                     );
+          //                     final jsonUpdate = allTasks
+          //                         .map((e) => e.toMap())
+          //                         .toList();
+          //                     await pref.setString(
+          //                       StorgeKey.tasksdata,
+          //                       jsonEncode(jsonUpdate),
+          //                     );
 
-      //                     gettaskname();
-      //                   }
-      //                 }
-      //               },
-      //               taskDesc: noDonetask.taskDesc,
-      //               taskTitle: noDonetask.taskName,
-      //             );
-      //           },
+          //                     gettaskname();
+          //                   }
+          //                 }
+          //               },
+          //               taskDesc: noDonetask.taskDesc,
+          //               taskTitle: noDonetask.taskName,
+          //             );
+          //           },
 
-      //           itemCount: newTodoList.length,
-      //         ),
-      //       ),
-      //     ],
-      //   ),
+          //           itemCount: newTodoList.length,
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+        );
+      },
     );
   }
 }
