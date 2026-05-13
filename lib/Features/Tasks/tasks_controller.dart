@@ -7,6 +7,9 @@ import 'package:protofilio/core/services/perfrence_manager.dart';
 
 class TasksController with ChangeNotifier {
   List<TaskModel> tasksList = [];
+  int selescteindex = 0;
+  int totalTasks = 0;
+  double percent = 0;
 
   void init() {
     _loadtasks();
@@ -28,23 +31,26 @@ class TasksController with ChangeNotifier {
       tasksList = finalDecodingTask.map((toElement) {
         return TaskModel.fromjson(toElement);
       }).toList();
+      calculatepercentage();
+
       notifyListeners();
     }
   }
 
   void toggleTaskStatus(TaskModel task, bool status) async {
     task.iSDONE = status;
-    _saveTasks();
-    notifyListeners();
 
     // اللوجيك الخاص بالحفظ والنسبة موجود بالفعل في هذه الدالة عندك
-    _saveTasks();
+    await _saveTasks();
+    calculatepercentage();
+
     notifyListeners();
   }
 
   void deleteTask(int id) async {
     tasksList.removeWhere((task) => task.id == id);
     _saveTasks();
+
     notifyListeners();
   }
 
@@ -59,5 +65,12 @@ class TasksController with ChangeNotifier {
       StorgeKey.tasksdata,
       jsonEncode(jsonUpdate),
     );
+  }
+
+  void calculatepercentage() {
+    // ✅ sync, no saving
+    totalTasks = tasksList.length;
+    percent = totalTasks == 0 ? 0 : compleatedTasksListdata.length / totalTasks;
+    notifyListeners();
   }
 }

@@ -24,7 +24,7 @@ class HighPeriorityTask extends StatelessWidget {
   @override
   @override
   Widget build(BuildContext context) {
-    return Consumer<HomeController>(
+    return Consumer<TasksController>(
       builder: (context, value, child) {
         return Container(
           padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
@@ -108,7 +108,7 @@ class HighPeriorityTask extends StatelessWidget {
                       MaterialPageRoute(builder: (_) => HighPeriorityTasks()),
                     ).then((value) {
                       // الكود ده هيتنفذ لما ترجع من الشاشة التانية
-                      context.read<HomeController>().refreshTasks();
+                      context.read<TasksController>().refreshTasks();
                     });
                   },
                   // لون التموج الأخضر الشفاف من الثيم

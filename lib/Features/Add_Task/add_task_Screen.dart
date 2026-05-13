@@ -186,7 +186,7 @@ class AddTask extends StatelessWidget {
                               return Switch(
                                 splashRadius: 2,
 
-                                value: controller.ishighpreority,
+                                value: value.ishighpreority,
                                 onChanged: (action) {
                                   value.toogel(
                                     action,

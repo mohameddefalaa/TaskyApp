@@ -37,7 +37,7 @@ class AddTaskController with ChangeNotifier {
       taskslist.add(model.toJson());
       final dynamic taasksData = jsonEncode(taskslist);
 
-      await PerfrenceManager().setstring("taasksData", taasksData).then((
+      await PerfrenceManager().setstring(StorgeKey.tasksdata, taasksData).then((
         value,
       ) {
         Navigator.of(context).pop(true);

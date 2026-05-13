@@ -22,90 +22,20 @@ class HomeController with ChangeNotifier {
   double percent = 0;
 
   void init() {
-    loadUsername();
-    gettaskname();
-    getimage();
+    getuserData();
   }
 
-  void getimage() {
+  void getuserData() {
     String? imagepath = PerfrenceManager().getstring(StorgeKey.userImage);
     if (imagepath != null && imagepath.isNotEmpty && imagepath != 'null') {
       selectedimage = File(imagepath);
     } else {
       selectedimage = null;
-      notifyListeners();
     }
-  }
-
-  void loadUsername() async {
-    // final pref = await SharedPreferences.getInstance();
     finalname = PerfrenceManager().getstring(StorgeKey.username);
     finalbio =
         PerfrenceManager().getstring(StorgeKey.bio) ??
         "One task at a time. One step closer.";
     notifyListeners();
-  }
-
-  void calculatepercentage() async {
-    totalTasks = allDataTaska.length;
-    if (totalTasks == 0) {
-      totalTasks = 0;
-    } else {
-      percent = (compleatedtasks.length / totalTasks);
-    }
-
-    final jsonUpdate = allDataTaska.map((e) => e.toJson()).toList();
-    await PerfrenceManager().setstring(
-      StorgeKey.tasksdata,
-      jsonEncode(jsonUpdate),
-    );
-    notifyListeners();
-  }
-
-  Future<void> gettaskname() async {
-    //final pref = await SharedPreferences.getInstance();
-    final decodingTask = PerfrenceManager().getstring(StorgeKey.tasksdata);
-    //final decodingTask = pref.getString("taasksData");
-    if (decodingTask != null) {
-      final finalDecodingTask = jsonDecode(decodingTask) as List<dynamic>;
-      var allTasks = finalDecodingTask.map((toElement) {
-        return TaskModel.fromjson(toElement);
-      }).toList();
-
-      allDataTaska = allTasks;
-      // log("${allTasks.length}");//
-      highPriorityTasksList = allDataTaska.reversed
-          .where((task) => task.isHighpreority == true)
-          .toList();
-
-      compleatedtasks = allDataTaska.reversed
-          .where((task) => task.iSDONE == true)
-          .toList();
-      calculatepercentage();
-      notifyListeners();
-    }
-  }
-
-  void toggleTaskStatus(TaskModel task, bool status) async {
-    task.iSDONE = status;
-    if (status) {
-      compleatedtasks.add(task);
-    } else {
-      compleatedtasks.remove(task);
-    }
-
-    // اللوجيك الخاص بالحفظ والنسبة موجود بالفعل في هذه الدالة عندك
-    calculatepercentage();
-  }
-
-  void deleteTask(int id) async {
-    allDataTaska.removeWhere((task) => task.id == id);
-    compleatedtasks.removeWhere((task) => task.id == id);
-    highPriorityTasksList.removeWhere((task) => task.id == id);
-    calculatepercentage(); // هيحفظ ويعمل notifyListeners تلقائي ✅
-  }
-
-  void refreshTasks() {
-    gettaskname(); // إعادة جلب البيانات من الـ Preference
   }
 }

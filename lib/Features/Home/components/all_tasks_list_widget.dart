@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:protofilio/Features/Home/components/custome_svg.dart';
-import 'package:protofilio/Features/Home/components/home_controller.dart';
+import 'package:protofilio/Features/Tasks/tasks_controller.dart';
 import 'package:protofilio/core/components/task_item.dart';
 import 'package:provider/provider.dart';
 
@@ -9,15 +9,15 @@ class AllTasksListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<HomeController>(
+    return Consumer<TasksController>(
       builder: (context, value, child) {
-        return value.allDataTaska.isNotEmpty
+        return value.tasksList.isNotEmpty
             ? SliverPadding(
                 padding: EdgeInsetsGeometry.only(bottom: 75),
                 sliver: SliverList.builder(
-                  itemCount: value.allDataTaska.length,
+                  itemCount: value.tasksList.length,
                   itemBuilder: (context, index) {
-                    final normaltasks = value.allDataTaska[index];
+                    final normaltasks = value.tasksList[index];
                     return TaskItem(
                       model: normaltasks,
                       onToggel: (bool? val) {

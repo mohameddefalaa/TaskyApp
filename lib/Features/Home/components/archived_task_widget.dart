@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:protofilio/Features/Home/components/home_controller.dart';
-import 'package:protofilio/Models/task_model.dart';
+import 'package:protofilio/Features/Tasks/tasks_controller.dart';
 import 'package:protofilio/theme/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -24,8 +23,8 @@ class ArchivedTask extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<HomeController>(
-      builder: (BuildContext context, HomeController value, Widget? child) {
+    return Consumer<TasksController>(
+      builder: (BuildContext context, TasksController value, Widget? child) {
         return Container(
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.surface,
@@ -49,7 +48,7 @@ class ArchivedTask extends StatelessWidget {
                     ),
                     Text(
                       overflow: TextOverflow.clip,
-                      "${value.compleatedtasks.length} out of ${value.totalTasks} Done",
+                      "${value.compleatedTasksListdata.length} out of ${value.tasksList.length} Done",
                       style: TextTheme.of(context).bodyMedium,
                     ),
                   ],
@@ -70,7 +69,7 @@ class ArchivedTask extends StatelessWidget {
                   radius: 26,
                   progressColor: AppColor.primaryColor,
                   center: Text(
-                    (value.allTasks.isEmpty &&
+                    (value.tasksList.isEmpty &&
                             value.highPriorityTasksList.isEmpty)
                         ? "0%" //to avoid null value when the taskslist is empty.
                         : "${(value.percent * 100).toInt()}%",
