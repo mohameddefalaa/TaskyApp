@@ -8,6 +8,7 @@ import 'package:protofilio/theme/dark_theme.dart';
 import 'package:protofilio/theme/light_theme.dart';
 import 'package:protofilio/theme/theme_controller.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,18 +32,24 @@ class TaskyApp extends StatelessWidget {
           },
           builder: (context, child) {
             final controller = context.watch<TasksController>();
-            return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              theme: lightTheme,
-              darkTheme: darkTheme,
-              themeMode: value,
+            return ScreenUtilInit(
+              designSize: const Size(375, 809),
+              minTextAdapt: true,
+              builder: (context, child) {
+                return MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  theme: lightTheme,
+                  darkTheme: darkTheme,
+                  themeMode: value,
 
-              //isDark == true ? darkTheme : lightTheme\
-              home: Scaffold(
-                body: username == null ? WelcomeScreen() : MainScren(),
+                  //isDark == true ? darkTheme : lightTheme\
+                  home: Scaffold(
+                    body: username == null ? WelcomeScreen() : MainScren(),
 
-                //: MainScren()
-              ),
+                    //: MainScren()
+                  ),
+                );
+              },
             );
           },
         );

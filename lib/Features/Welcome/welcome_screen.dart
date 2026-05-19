@@ -6,6 +6,7 @@ import 'package:protofilio/core/constants/storge_key.dart';
 import 'package:protofilio/core/services/perfrence_manager.dart';
 import 'package:protofilio/core/widgets/custome_button.dart';
 import 'package:protofilio/Features/Home/components/custome_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -41,7 +42,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+          padding: EdgeInsets.symmetric(vertical: 8.dg, horizontal: 16.dg),
           child: SingleChildScrollView(
             child: Form(
               key: _namekey,
@@ -58,14 +59,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       // ),
                       CustomeSvg(
                         path: 'assets/images/AppLogo.svg',
-                        height: 42,
-                        width: 42,
+                        height: 42.h,
+                        width: 42.w,
                       ),
-                      SizedBox(width: 16),
+                      SizedBox(width: 16.w),
                       Text("Tasky", style: TextTheme.of(context).displayMedium),
                     ],
                   ),
-                  const SizedBox(height: 108),
+                  SizedBox(height: 108.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -75,25 +76,25 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                       CustomeSvg.withoutcolor(
                         path: "assets/images/waving-hand.svg",
-                        height: 28,
-                        width: 28,
+                        height: 28.h,
+                        width: 28.w,
                       ),
                     ],
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8.h),
                   Text(
                     "Your productivity journey starts here.",
                     style: TextTheme.of(
                       context,
-                    ).displaySmall!.copyWith(fontSize: 16),
+                    ).displaySmall!.copyWith(fontSize: 16.sp),
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24.h),
                   SvgPicture.asset(
                     "assets/images/pana.svg",
-                    height: 204.39,
-                    width: 215,
+                    height: 204.39.h,
+                    width: 215.w,
                   ),
-                  const SizedBox(height: 28),
+                  SizedBox(height: 28.h),
                   Align(
                     alignment: AlignmentGeometry.centerLeft,
                     child: Text(
@@ -101,7 +102,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       style: TextTheme.of(context).titleMedium,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8.h),
 
                   TextFormField(
                     decoration: InputDecoration(hintText: 'ex;Mohamed Ismail'),
@@ -113,7 +114,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     },
                     controller: nameController,
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24.h),
                   CustomeButton(
                     icon: SizedBox(),
                     title: 'Let’s Get Started',
@@ -141,7 +142,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w300,
-                                fontSize: 16,
+                                fontSize: 16.sp,
                               ),
                             ),
                           ),

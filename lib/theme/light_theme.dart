@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:protofilio/theme/colors.dart';
 
@@ -33,7 +34,7 @@ ThemeData lightTheme = ThemeData(
       if (state.contains(WidgetState.selected)) {
         return 0;
       } else {
-        return 2;
+        return 2.w;
       }
     }),
   ),
@@ -43,7 +44,7 @@ ThemeData lightTheme = ThemeData(
     iconTheme: IconThemeData(color: AppColor.primaryLightText),
     centerTitle: true,
     titleTextStyle: GoogleFonts.poppins(
-      fontSize: 20,
+      fontSize: 20.sp,
       fontWeight: FontWeight.w400,
       color: AppColor.primaryLightText,
     ),
@@ -55,7 +56,7 @@ ThemeData lightTheme = ThemeData(
     style: ElevatedButton.styleFrom(
       elevation: .5,
       shadowColor: Colors.grey,
-      fixedSize: Size(double.infinity, 40),
+      fixedSize: Size(double.infinity, 40.h),
       foregroundColor: Colors.transparent,
       backgroundColor: AppColor.primaryColor,
     ),
@@ -70,21 +71,21 @@ ThemeData lightTheme = ThemeData(
     foregroundColor: Color(0xffFFFCFC),
     backgroundColor: AppColor.primaryColor,
     shape: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(30),
+      borderRadius: BorderRadius.circular(30.r),
       borderSide: BorderSide(color: Colors.transparent),
     ),
   ),
   iconButtonTheme: IconButtonThemeData(
     style: ButtonStyle(
-      iconSize: WidgetStatePropertyAll(24),
+      iconSize: WidgetStatePropertyAll(24.r),
       iconColor: WidgetStatePropertyAll(Color(0xff3A4640)),
     ),
   ),
-  iconTheme: IconThemeData(size: 24, color: AppColor.primaryLightText),
+  iconTheme: IconThemeData(size: 24.r, color: AppColor.primaryLightText),
   listTileTheme: ListTileThemeData(
     contentPadding: EdgeInsets.zero,
     titleTextStyle: GoogleFonts.poppins(
-      fontSize: 16,
+      fontSize: 16.sp,
       fontWeight: FontWeight.w400,
       color: AppColor.primaryLightText,
     ),
@@ -93,28 +94,28 @@ ThemeData lightTheme = ThemeData(
   ),
   dividerTheme: DividerThemeData(color: AppColor.lightBoreder, thickness: 1),
   inputDecorationTheme: InputDecorationThemeData(
-    contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-    hintStyle: TextStyle(fontSize: 16, color: AppColor.placeholderText),
+    contentPadding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
+    hintStyle: TextStyle(fontSize: 16.sp, color: AppColor.placeholderText),
     border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(16.r),
 
-      borderSide: BorderSide(color: AppColor.lightBoreder, width: 0.25),
+      borderSide: BorderSide(color: AppColor.lightBoreder, width: 0.25.w),
     ),
 
     focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(16.r),
 
-      borderSide: BorderSide(color: AppColor.lightBoreder, width: 0.35),
+      borderSide: BorderSide(color: AppColor.lightBoreder, width: 0.35.w),
     ),
     enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(16.r),
 
-      borderSide: BorderSide(color: AppColor.lightBoreder, width: 0.35),
+      borderSide: BorderSide(color: AppColor.lightBoreder, width: 0.35.w),
     ),
     errorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(16.r),
 
-      borderSide: BorderSide(color: Colors.red, width: 0.5),
+      borderSide: BorderSide(color: Colors.red, width: 0.5.w),
     ),
     //
     filled: true,
@@ -122,14 +123,14 @@ ThemeData lightTheme = ThemeData(
   ),
   textTheme: TextTheme(
     bodyMedium: GoogleFonts.poppins(
-      fontSize: 14,
+      fontSize: 14.sp,
       color: AppColor.primaryLightText, // اللون الذي كنت تضعه في الـ Style
       letterSpacing: .5,
 
       // الـ Letter Spacing الذي طلبته
     ),
     headlineLarge: GoogleFonts.plusJakartaSans(
-      fontSize: 32,
+      fontSize: 32.sp,
       color: AppColor.primaryLightText,
       fontWeight: FontWeight.w400,
       letterSpacing: .5, // الـ Letter Spacing الذي طلبته
@@ -137,22 +138,22 @@ ThemeData lightTheme = ThemeData(
     titleMedium: GoogleFonts.poppins(
       color: AppColor.primaryLightText,
 
-      fontSize: 16,
+      fontSize: 16.sp,
       fontWeight: FontWeight.w400,
       letterSpacing: .5,
     ),
     titleLarge: GoogleFonts.poppins(
-      fontSize: 20,
+      fontSize: 20.sp,
       fontWeight: FontWeight.w400, // غالباً يكون شبه عريض (Semi-Bold)
       color: AppColor.primaryLightText,
     ),
     displayMedium: GoogleFonts.plusJakartaSans(
-      fontSize: 28,
+      fontSize: 28.sp,
       color: AppColor.primaryLightText,
       fontWeight: FontWeight.w400,
     ),
     displaySmall: GoogleFonts.plusJakartaSans(
-      fontSize: 24,
+      fontSize: 24.sp,
       fontWeight: FontWeight.w400,
       color: AppColor.primaryLightText,
     ),
@@ -167,11 +168,11 @@ ThemeData lightTheme = ThemeData(
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     unselectedIconTheme: IconThemeData(color: AppColor.secondaryLightText),
     selectedLabelStyle: GoogleFonts.roboto(
-      fontSize: 12,
+      fontSize: 12.sp,
       fontWeight: FontWeight.w600,
       color: Color(0xff3A4640),
     ),
-    selectedIconTheme: IconThemeData(color: AppColor.primaryColor, size: 25),
+    selectedIconTheme: IconThemeData(color: AppColor.primaryColor, size: 25.r),
     selectedItemColor: AppColor.primaryColor,
     unselectedItemColor: Color(0xff3A4640),
     type: BottomNavigationBarType.fixed,
@@ -179,7 +180,7 @@ ThemeData lightTheme = ThemeData(
   ),
   checkboxTheme: CheckboxThemeData(
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadiusGeometry.circular(4),
+      borderRadius: BorderRadiusGeometry.circular(4.r),
     ),
     fillColor: WidgetStateProperty.resolveWith((state) {
       if (state.contains(WidgetState.selected)) {
@@ -189,20 +190,20 @@ ThemeData lightTheme = ThemeData(
       }
     }),
     checkColor: WidgetStatePropertyAll(AppColor.primaryDarkText),
-    side: BorderSide(color: AppColor.lightBoreder, width: 2),
+    side: BorderSide(color: AppColor.lightBoreder, width: 2.w),
   ),
   splashFactory: NoSplash.splashFactory,
   popupMenuTheme: PopupMenuThemeData(
     labelTextStyle: WidgetStatePropertyAll(
       GoogleFonts.poppins(
-        fontSize: 14,
+        fontSize: 14.sp,
         fontWeight: FontWeight.w400,
         color: AppColor.primaryLightText,
       ),
     ),
     color: AppColor.lightBackground,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadiusGeometry.circular(16),
+      borderRadius: BorderRadiusGeometry.circular(16.r),
       // side: BorderSide(color: AppColor.primaryColor.withAlpha(40)),
     ),
     shadowColor: AppColor.darkBackground,
@@ -211,7 +212,7 @@ ThemeData lightTheme = ThemeData(
   bottomSheetTheme: BottomSheetThemeData(
     backgroundColor: AppColor.darkBackground,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadiusGeometry.circular(16),
+      borderRadius: BorderRadiusGeometry.circular(16.r),
     ),
   ),
 );
