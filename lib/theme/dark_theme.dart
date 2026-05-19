@@ -1,8 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:protofilio/theme/colors.dart';
+import 'package:protofilio/core/constants/app_size.dart';
 
 ThemeData darkTheme = ThemeData(
   colorScheme: ColorScheme.dark(
@@ -31,7 +30,7 @@ ThemeData darkTheme = ThemeData(
       if (state.contains(WidgetState.selected)) {
         return 0;
       } else {
-        return 2;
+        return AppSize.w1 * 1.6; // 2.w
       }
     }),
   ),
@@ -41,7 +40,7 @@ ThemeData darkTheme = ThemeData(
     iconTheme: const IconThemeData(color: AppColor.primaryDarkText),
     centerTitle: true,
     titleTextStyle: GoogleFonts.poppins(
-      fontSize: 20,
+      fontSize: AppSize.sp20,
       fontWeight: FontWeight.w400,
       color: AppColor.primaryDarkText,
     ),
@@ -52,7 +51,7 @@ ThemeData darkTheme = ThemeData(
     style: ElevatedButton.styleFrom(
       elevation: .5,
       shadowColor: Colors.black,
-      fixedSize: const Size(double.infinity, 40),
+      fixedSize: Size(double.infinity, AppSize.h40),
       foregroundColor: Colors.transparent,
       backgroundColor: AppColor.primaryColor,
     ),
@@ -68,21 +67,21 @@ ThemeData darkTheme = ThemeData(
     foregroundColor: const Color(0xffFFFCFC),
     backgroundColor: AppColor.primaryColor,
     shape: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(30),
+      borderRadius: BorderRadius.circular(AppSize.r30),
       borderSide: const BorderSide(color: Colors.transparent),
     ),
   ),
-  iconButtonTheme: const IconButtonThemeData(
+  iconButtonTheme: IconButtonThemeData(
     style: ButtonStyle(
-      iconSize: WidgetStatePropertyAll(24),
+      iconSize: WidgetStatePropertyAll(AppSize.r24),
       iconColor: WidgetStatePropertyAll(AppColor.primaryDarkText),
     ),
   ),
-  iconTheme: const IconThemeData(size: 24, color: AppColor.primaryDarkText),
+  iconTheme: IconThemeData(size: AppSize.r24, color: AppColor.primaryDarkText),
   listTileTheme: ListTileThemeData(
     contentPadding: EdgeInsets.zero,
     titleTextStyle: GoogleFonts.poppins(
-      fontSize: 16,
+      fontSize: AppSize.sp16,
       fontWeight: FontWeight.w400,
       color: AppColor.primaryDarkText,
     ),
@@ -94,51 +93,57 @@ ThemeData darkTheme = ThemeData(
     thickness: 1,
   ),
   inputDecorationTheme: InputDecorationThemeData(
-    contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-    hintStyle: const TextStyle(fontSize: 16, color: AppColor.placeholderText),
+    contentPadding: EdgeInsets.symmetric(
+      vertical: AppSize.dg16,
+      horizontal: AppSize.dg16,
+    ),
+    hintStyle: TextStyle(
+      fontSize: AppSize.sp16,
+      color: AppColor.placeholderText,
+    ),
     border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(AppSize.r16),
       borderSide: BorderSide.none,
     ),
     errorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(AppSize.r16),
 
-      borderSide: BorderSide(color: Colors.red, width: 0.5),
+      borderSide: BorderSide(color: Colors.red, width: AppSize.w1 * 0.4),
     ),
     filled: true,
     fillColor: AppColor.secondryDarkBackground,
   ),
   textTheme: TextTheme(
     bodyMedium: GoogleFonts.poppins(
-      fontSize: 14,
+      fontSize: AppSize.sp14,
       color: AppColor.secondaryDarkText,
       letterSpacing: .5,
     ),
     displayMedium: TextStyle(
-      fontSize: 28,
+      fontSize: AppSize.sp28,
       color: AppColor.primaryDarkText,
       fontWeight: FontWeight.w400,
     ),
     headlineLarge: GoogleFonts.plusJakartaSans(
-      fontSize: 32,
+      fontSize: AppSize.sp32,
       color: AppColor.primaryDarkText,
       fontWeight: FontWeight.w400,
       letterSpacing: .5,
     ),
     titleMedium: GoogleFonts.poppins(
       color: AppColor.primaryDarkText,
-      fontSize: 16,
+      fontSize: AppSize.sp16,
       fontWeight: FontWeight.w400,
       letterSpacing: .5,
     ),
     titleLarge: GoogleFonts.poppins(
-      fontSize: 20,
+      fontSize: AppSize.sp20,
       fontWeight: FontWeight.w400,
       color: AppColor.primaryDarkText,
     ),
 
     displaySmall: GoogleFonts.plusJakartaSans(
-      fontSize: 24,
+      fontSize: AppSize.sp24,
       fontWeight: FontWeight.w400,
       color: AppColor.primaryDarkText,
     ),
@@ -151,13 +156,13 @@ ThemeData darkTheme = ThemeData(
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     unselectedIconTheme: const IconThemeData(color: AppColor.secondaryDarkText),
     selectedLabelStyle: GoogleFonts.roboto(
-      fontSize: 12,
+      fontSize: AppSize.sp12,
       fontWeight: FontWeight.w600,
       color: AppColor.primaryDarkText,
     ),
-    selectedIconTheme: const IconThemeData(
+    selectedIconTheme: IconThemeData(
       color: AppColor.primaryColor,
-      size: 25,
+      size: AppSize.r24 * 1.04,
     ),
     selectedItemColor: AppColor.primaryColor,
     unselectedItemColor: AppColor.secondaryDarkText,
@@ -174,20 +179,20 @@ ThemeData darkTheme = ThemeData(
       }
     }),
     checkColor: const WidgetStatePropertyAll(AppColor.primaryDarkText),
-    side: const BorderSide(color: AppColor.darkBoreder, width: 2),
+    side: BorderSide(color: AppColor.darkBoreder, width: AppSize.w1 * 1.6),
   ),
   splashFactory: NoSplash.splashFactory,
   popupMenuTheme: PopupMenuThemeData(
     labelTextStyle: WidgetStatePropertyAll(
       GoogleFonts.poppins(
-        fontSize: 14,
+        fontSize: AppSize.sp14,
         fontWeight: FontWeight.w400,
         color: AppColor.primaryDarkText,
       ),
     ),
     color: AppColor.darkBackground,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadiusGeometry.circular(16),
+      borderRadius: BorderRadius.circular(AppSize.r16),
       side: BorderSide(color: AppColor.primaryColor.withAlpha(40)),
     ),
     shadowColor: AppColor.darkBackground,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:protofilio/Features/Home/components/custome_svg.dart';
 import 'package:protofilio/Features/Tasks/tasks_controller.dart';
 import 'package:protofilio/core/components/task_item.dart';
+import 'package:protofilio/core/constants/app_size.dart';
 import 'package:provider/provider.dart';
 
 class AllTasksListWidget extends StatelessWidget {
@@ -13,7 +14,7 @@ class AllTasksListWidget extends StatelessWidget {
       builder: (context, value, child) {
         return value.tasksList.isNotEmpty
             ? SliverPadding(
-                padding: EdgeInsetsGeometry.only(bottom: 75),
+                padding: EdgeInsets.only(bottom: AppSize.h40 * 1.875),
                 sliver: SliverList.builder(
                   itemCount: value.tasksList.length,
                   itemBuilder: (context, index) {
@@ -39,18 +40,10 @@ class AllTasksListWidget extends StatelessWidget {
                     Center(
                       child: CustomeSvg.withoutcolor(
                         path: 'assets/images/NOTASK.svg',
-                        height: 100,
+                        height: AppSize.h20 * 5,
                       ),
-
-                      // SvgPicture.asset(
-                      //   'assets/images/NOTASK.svg',
-                      //   height: 100,
-                      //   color: AppColor.primaryDarkText,
-                      //   width: 100,
-                      // ),
                     ),
-
-                    const SizedBox(height: 8),
+                    SizedBox(height: AppSize.h8),
                     Text(
                       "Please Add A new Task Now Let's Go",
                       style: TextTheme.of(context).labelLarge,

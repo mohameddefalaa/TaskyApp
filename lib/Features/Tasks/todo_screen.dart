@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:protofilio/Features/Tasks/tasks_controller.dart';
 import 'package:protofilio/core/components/task_item.dart';
+import 'package:protofilio/core/constants/app_size.dart';
 import 'package:provider/provider.dart';
 
 class TodoScreen extends StatelessWidget {
@@ -39,7 +40,7 @@ class TodoScreen extends StatelessWidget {
                     false, // لضمان عدم حدوث مشاكل في التمرير إذا كان المحتوى صغيراً
                 child: Center(
                   child: Padding(
-                    padding: EdgeInsets.all(20.0),
+                    padding: EdgeInsets.all(AppSize.dg20),
                     child: Text(
                       'No Tasks or maybe You have finished it',
                       textAlign: TextAlign

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:protofilio/theme/colors.dart';
+import 'package:protofilio/core/constants/app_size.dart';
 
 class CustomecCard extends StatelessWidget {
   const CustomecCard({
@@ -25,7 +26,7 @@ class CustomecCard extends StatelessWidget {
             titleCard,
             style: TextTheme.of(context).bodyMedium!.copyWith(
               //
-              fontSize: 16,
+              fontSize: AppSize.sp16,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -35,8 +36,8 @@ class CustomecCard extends StatelessWidget {
               color: Theme.of(context).colorScheme.primaryContainer,
               child: ListTile(
                 contentPadding: EdgeInsets.symmetric(
-                  horizontal: 8,
-                  vertical: 4,
+                  horizontal: AppSize.dg8,
+                  vertical: AppSize.dg4,
                 ),
                 title: Text(title),
                 subtitle: Text(subTitle),

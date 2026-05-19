@@ -1,14 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:protofilio/Features/Home/components/home_controller.dart';
 import 'package:protofilio/Features/Tasks/high_periority_tasks.dart';
 import 'package:protofilio/Features/Tasks/tasks_controller.dart';
-import 'package:protofilio/Models/task_model.dart';
-import 'package:protofilio/core/constants/storge_key.dart';
 import 'package:protofilio/theme/colors.dart';
-import 'package:protofilio/core/services/perfrence_manager.dart';
+import 'package:protofilio/core/constants/app_size.dart';
 import 'package:protofilio/core/components/task_check_list.dart';
 import 'package:provider/provider.dart';
 
@@ -27,16 +22,19 @@ class HighPeriorityTask extends StatelessWidget {
     return Consumer<TasksController>(
       builder: (context, value, child) {
         return Container(
-          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          padding: EdgeInsets.symmetric(
+            horizontal: AppSize.dg8,
+            vertical: AppSize.dg16,
+          ),
           width: double.infinity,
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.surface,
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(AppSize.r16),
             border: Border.all(
               color: Theme.of(
                 context,
               ).colorScheme.outline, // سحب اللون من الثيم
-              width: 1.0, // سمك الخط
+              width: 1.0, // Standard border width
             ),
           ),
           child: Row(
@@ -80,7 +78,7 @@ class HighPeriorityTask extends StatelessWidget {
                         : Text(
                             'No Tasks Yet',
                             style: GoogleFonts.poppins(
-                              fontSize: 14,
+                              fontSize: AppSize.sp14,
                               fontWeight: FontWeight.w400,
                               color: Colors.white,
                             ),
@@ -96,7 +94,7 @@ class HighPeriorityTask extends StatelessWidget {
                     color: Theme.of(
                       context,
                     ).colorScheme.outlineVariant.withAlpha(60),
-                    width: 1.25,
+                    width: AppSize.w1, // Custom border width
                   ),
                 ),
                 clipBehavior:
@@ -113,9 +111,9 @@ class HighPeriorityTask extends StatelessWidget {
                   },
                   // لون التموج الأخضر الشفاف من الثيم
                   splashColor: AppColor.primaryColor.withAlpha(20),
-                  child: const Padding(
-                    padding: EdgeInsets.all(12.0), // مساحة الضغط
-                    child: Icon(Icons.north_east_rounded, size: 20),
+                  child: Padding(
+                    padding: EdgeInsets.all(AppSize.dg12), // مساحة الضغط
+                    child: Icon(Icons.north_east_rounded, size: AppSize.r20),
                   ),
                 ),
               ),

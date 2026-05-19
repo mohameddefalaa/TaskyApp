@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:protofilio/Features/Tasks/tasks_controller.dart';
+import 'package:protofilio/core/constants/app_size.dart';
 import 'package:protofilio/theme/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -28,12 +29,15 @@ class ArchivedTask extends StatelessWidget {
         return Container(
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.surface,
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(AppSize.r16),
           ),
           width: double.infinity,
-          height: 72,
+          height: AppSize.h40 * 1.8,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6),
+            padding: EdgeInsets.symmetric(
+              horizontal: AppSize.w16,
+              vertical: AppSize.h4 * 1.5,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -56,8 +60,8 @@ class ArchivedTask extends StatelessWidget {
                 value.percent * 100 == 100
                     ? SvgPicture.asset(
                         "assets/images/done2.svg",
-                        height: 50,
-                        width: 50,
+                        height: AppSize.h48 + AppSize.h4 / 2,
+                        width: AppSize.w48 + AppSize.w4 / 2,
                         color: AppColor.primaryColor,
                       )
                     : SizedBox(),
@@ -66,7 +70,7 @@ class ArchivedTask extends StatelessWidget {
                   backgroundColor: Color(0XFF9E9E9E),
                   startAngle: 270.0,
                   percent: value.percent,
-                  radius: 26,
+                  radius: AppSize.r24 + AppSize.r4 / 2,
                   progressColor: AppColor.primaryColor,
                   center: Text(
                     (value.tasksList.isEmpty &&

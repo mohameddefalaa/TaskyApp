@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:protofilio/core/constants/app_size.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:protofilio/Features/Home/components/all_tasks_list_widget.dart';
 import 'package:protofilio/Features/Home/components/home_controller.dart';
@@ -21,7 +22,7 @@ class HomeScreen extends StatelessWidget {
         final controller = context.watch<TasksController>();
         return Scaffold(
           floatingActionButton: SizedBox(
-            height: 40,
+            height: AppSize.h40,
             child: Builder(
               builder: (context) {
                 return FloatingActionButton.extended(
@@ -42,13 +43,13 @@ class HomeScreen extends StatelessWidget {
 
                   icon: SvgPicture.asset(
                     "assets/images/PLUS_icon.svg",
-                    height: 18,
-                    width: 18,
+                    height: AppSize.sp18,
+                    width: AppSize.sp18,
                   ),
                   label: Text(
                     "Add New Task",
                     style: GoogleFonts.poppins(
-                      fontSize: 14,
+                      fontSize: AppSize.sp14,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -64,7 +65,7 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     SafeArea(
                       child: Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: EdgeInsets.all(AppSize.dg16),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -87,25 +88,30 @@ class HomeScreen extends StatelessWidget {
                                       ) {
                                         return ClipOval(
                                           child: SizedBox.fromSize(
-                                            size: Size.fromRadius(35),
+                                            size: Size.fromRadius(
+                                              AppSize.r32 + AppSize.r4 / 1.3,
+                                            ),
                                             child:
                                                 selectedimage != null &&
                                                     selectedimage.existsSync()
                                                 ? Image.file(selectedimage)
                                                 : SvgPicture.asset(
                                                     "assets/images/person.svg",
-                                                    alignment: AlignmentGeometry
-                                                        .center,
+                                                    alignment: Alignment.center,
                                                     fit: BoxFit.cover,
 
-                                                    height: 50,
-                                                    width: 50,
+                                                    height:
+                                                        AppSize.h48 +
+                                                        AppSize.h4 / 2,
+                                                    width:
+                                                        AppSize.w48 +
+                                                        AppSize.w4 / 2,
                                                   ),
                                           ),
                                         );
                                       },
                                 ),
-                                const SizedBox(width: 8),
+                                SizedBox(width: AppSize.w8),
                                 Expanded(
                                   child: Column(
                                     crossAxisAlignment:
@@ -167,7 +173,7 @@ class HomeScreen extends StatelessWidget {
                                             ThemeMode.dark
                                         ? SvgPicture.asset(
                                             "assets/images/moon.svg",
-                                            height: 20,
+                                            height: AppSize.h20,
                                             width: 16,
                                             color: Theme.of(
                                               context,
@@ -175,7 +181,7 @@ class HomeScreen extends StatelessWidget {
                                           )
                                         : SvgPicture.asset(
                                             "assets/images/sun.svg",
-                                            height: 20,
+                                            height: AppSize.h20,
                                             width: 16,
                                             color: Theme.of(
                                               context,
@@ -185,7 +191,7 @@ class HomeScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 16),
+                            SizedBox(height: AppSize.h16),
 
                             Text(
                               overflow: TextOverflow.clip,
@@ -199,17 +205,17 @@ class HomeScreen extends StatelessWidget {
                                   "almost done !   ",
                                   style: TextTheme.of(context).headlineLarge,
                                 ),
-                                const SizedBox(width: 8),
+                                SizedBox(width: AppSize.w8),
 
                                 SvgPicture.asset(
                                   "assets/images/waving-hand.svg",
 
-                                  height: 32,
-                                  width: 32,
+                                  height: AppSize.h32,
+                                  width: AppSize.w32,
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 16),
+                            SizedBox(height: AppSize.h16),
                             ArchivedTask(
                               // compleatedtasks: value.compleatedtasks,
                               // totalTasks: value.totalTasks,
@@ -217,7 +223,7 @@ class HomeScreen extends StatelessWidget {
                               // alltasks: value.allDataTaska,
                               // highPriorityTasksList: value.allDataTaska,
                             ),
-                            const SizedBox(height: 8),
+                            SizedBox(height: AppSize.h8),
                             HighPeriorityTask(),
                             const SizedBox(height: 24),
                             Text(

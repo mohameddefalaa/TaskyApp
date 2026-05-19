@@ -1,11 +1,8 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:protofilio/Features/Add_Task/add_task_controller.dart';
-import 'package:protofilio/Models/task_model.dart';
-import 'package:protofilio/core/constants/storge_key.dart';
-import 'package:protofilio/core/services/perfrence_manager.dart';
+import 'package:protofilio/core/constants/app_size.dart';
 import 'package:protofilio/core/widgets/custome_button.dart';
 import 'package:protofilio/Features/Profile/widgets/custome_card.dart';
 import 'package:protofilio/core/widgets/custome_text_filed.dart';
@@ -27,8 +24,8 @@ class AddTask extends StatelessWidget {
           body: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsetsGeometry.symmetric(
-                horizontal: 16,
-                vertical: 8,
+                horizontal: AppSize.dg16,
+                vertical: AppSize.dg8,
               ),
               child: Form(
                 key: controller.key,
@@ -52,7 +49,7 @@ class AddTask extends StatelessWidget {
 
                           hinttext: 'mma trainig ',
                         ),
-                        const SizedBox(height: 20),
+                        SizedBox(height: AppSize.h20),
 
                         CustomeTextFiled(
                           title: 'TAsk Desc',
@@ -62,30 +59,7 @@ class AddTask extends StatelessWidget {
                           hinttext:
                               ' It looks like your previous text wasn’t readable —',
                         ),
-                        const SizedBox(height: 20),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //   children: [
-                        //     Text(
-                        //       "High Priority",
-                        //       style: TextTheme.of(context).titleMedium,
-                        //     ),
-                        //     SizedBox(
-                        //       height: 32,
-                        //       width: 52,
-                        //       child: Switch(
-                        //         splashRadius: 2,
-
-                        //         value: ishighpreority,
-                        //         onChanged: (bool value) {
-                        //           setState(() {
-                        //             ishighpreority = value;
-                        //           });
-                        //         },
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
+                        SizedBox(height: AppSize.h20),
                       ],
                     ),
                     Consumer<AddTaskController>(
@@ -139,11 +113,14 @@ class AddTask extends StatelessWidget {
                       },
                     ),
                     Container(
-                      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+                      margin: EdgeInsets.symmetric(
+                        vertical: AppSize.dg8,
+                        horizontal: AppSize.dg4,
+                      ),
                       padding: EdgeInsets.all(8),
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
+                        borderRadius: BorderRadius.circular(AppSize.r16),
                         color: Theme.of(context).colorScheme.primaryContainer,
                       ),
                       child: Row(
@@ -161,7 +138,7 @@ class AddTask extends StatelessWidget {
                             child: Icon(
                               Icons.electric_bolt_outlined,
                               color: Color(0xffBD1622),
-                              size: 30,
+                              size: AppSize.r30,
                             ),
                           ),
                           Column(
@@ -177,7 +154,7 @@ class AddTask extends StatelessWidget {
                                 "Flag for immediate focus",
                                 style: TextTheme.of(
                                   context,
-                                ).bodyMedium!.copyWith(fontSize: 12),
+                                ).bodyMedium!.copyWith(fontSize: AppSize.sp12),
                               ),
                             ],
                           ),

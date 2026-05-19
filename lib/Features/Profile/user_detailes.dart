@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:protofilio/core/constants/storge_key.dart';
-import 'package:protofilio/theme/colors.dart';
 import 'package:protofilio/core/services/perfrence_manager.dart';
 import 'package:protofilio/core/widgets/custome_button.dart';
 import 'package:protofilio/core/widgets/custome_text_filed.dart';
+import 'package:protofilio/core/constants/app_size.dart';
+// Note: The instruction asked for newsapp path but the context shows protofilio. Using the project's actual path.
 
 class UserDetailes extends StatefulWidget {
   const UserDetailes({super.key});
@@ -40,7 +40,7 @@ class _UserDetailesState extends State<UserDetailes> {
     return Scaffold(
       appBar: AppBar(title: Text("User Details"), centerTitle: false),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(AppSize.dg16),
         child: Form(
           key: _key,
           child: SingleChildScrollView(
@@ -51,6 +51,7 @@ class _UserDetailesState extends State<UserDetailes> {
                     if (value == null || value.trim().isEmpty) {
                       return 'please Enter Your Name';
                     }
+                    return null;
                   },
                   hinttext: finalName ?? "",
                   controller: userNameController,
@@ -63,6 +64,7 @@ class _UserDetailesState extends State<UserDetailes> {
                     if (value == null || value.trim().isEmpty) {
                       return 'please Enter Your Motivation Quote';
                     }
+                    return null;
                   },
                   hinttext: 'One task at a time. One step closer.',
                   controller: biocontroller,
@@ -70,7 +72,7 @@ class _UserDetailesState extends State<UserDetailes> {
                   minlins: 4,
                   title: 'Motivation Quote',
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height / 40),
+                SizedBox(height: AppSize.h20),
                 CustomeButton(
                   icon: SizedBox(),
                   title: 'Save Changes',
