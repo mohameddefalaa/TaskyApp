@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:protofilio/Features/Tasks/tasks_controller.dart';
 import 'package:protofilio/core/components/task_item.dart';
+import 'package:protofilio/core/constants/app_size.dart';
 import 'package:provider/provider.dart';
 
 class HighPeriorityTasks extends StatelessWidget {
@@ -14,47 +15,54 @@ class HighPeriorityTasks extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(title: Text("high Periority Tasks")),
-          controller.highPriorityTasksList.isNotEmpty
-              ? SliverList.builder(
-                  itemCount: controller.highPriorityTasksList.length,
+          if (controller.highPriorityTasksList.isNotEmpty)
+            SliverPadding(
+              padding: EdgeInsets.symmetric(
+                horizontal: AppSize.dg16,
+                vertical: AppSize.dg8,
+              ),
+              sliver: SliverList.builder(
+                itemCount: controller.highPriorityTasksList.length,
 
-                  itemBuilder: (context, index) {
-                    final hoghjperiorityTaskslist =
-                        controller.highPriorityTasksList[index];
+                itemBuilder: (context, index) {
+                  final hoghjperiorityTaskslist =
+                      controller.highPriorityTasksList[index];
 
-                    return TaskItem(
-                      model: hoghjperiorityTaskslist,
-                      onToggel: (bool? val) {
-                        controller.toggleTaskStatus(
-                          hoghjperiorityTaskslist,
-                          val!,
-                        );
-                      },
-                      onDelete: (int? id) {
-                        controller.deleteTask(hoghjperiorityTaskslist.id);
-                      },
-                      onEdite: () {
-                        controller.refreshTasks();
-                      },
-                    );
-                  },
-                )
-              : SliverFillRemaining(
-                  // تم التعديل هنا
-                  hasScrollBody:
-                      false, // لضمان عدم حدوث مشاكل في التمرير إذا كان المحتوى صغيراً
-                  child: Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(20.0),
-                      child: Text(
-                        'No Tasks or maybe You have finished it',
-                        textAlign: TextAlign
-                            .center, // لضمان توسيط الأسطر إذا كان النص طويلاً
-                        style: TextTheme.of(context).titleLarge,
-                      ),
-                    ),
+                  return TaskItem(
+                    model: hoghjperiorityTaskslist,
+                    onToggel: (bool? val) {
+                      controller.toggleTaskStatus(
+                        hoghjperiorityTaskslist,
+                        val!,
+                      );
+                    },
+                    onDelete: (int? id) {
+                      controller.deleteTask(hoghjperiorityTaskslist.id);
+                    },
+                    onEdite: () {
+                      controller.refreshTasks();
+                    },
+                  );
+                },
+              ),
+            )
+          else
+            SliverFillRemaining(
+              // تم التعديل هنا
+              hasScrollBody:
+                  false, // لضمان عدم حدوث مشاكل في التمرير إذا كان المحتوى صغيراً
+              child: Center(
+                child: Padding(
+                  padding: EdgeInsets.all(AppSize.dg20),
+                  child: Text(
+                    'No Tasks or maybe You have finished it',
+                    textAlign: TextAlign
+                        .center, // لضمان توسيط الأسطر إذا كان النص طويلاً
+                    style: TextTheme.of(context).titleLarge,
                   ),
                 ),
+              ),
+            ),
         ],
 
         //  Column(

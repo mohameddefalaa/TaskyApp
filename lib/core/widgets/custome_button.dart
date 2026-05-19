@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:protofilio/theme/colors.dart';
+import 'package:protofilio/core/constants/app_size.dart';
 
 class CustomeButton extends StatelessWidget {
   const CustomeButton({
@@ -18,7 +19,7 @@ class CustomeButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         elevation: .5,
         shadowColor: Colors.grey,
-        fixedSize: Size(MediaQuery.of(context).size.width, 40),
+        fixedSize: Size(MediaQuery.of(context).size.width, AppSize.h40),
         foregroundColor: Colors.white,
         backgroundColor: AppColor.primaryColor,
       ),
@@ -26,7 +27,10 @@ class CustomeButton extends StatelessWidget {
       icon: icon,
       label: Text(
         title,
-        style: GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w500),
+        style: GoogleFonts.poppins(
+          fontSize: AppSize.sp14,
+          fontWeight: FontWeight.w500,
+        ),
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:protofilio/theme/colors.dart';
+import 'package:protofilio/core/constants/app_size.dart';
 
 class CustomeTextFiled extends StatelessWidget {
   const CustomeTextFiled({
@@ -25,7 +25,7 @@ class CustomeTextFiled extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(title, style: TextTheme.of(context).titleMedium),
-        const SizedBox(height: 16),
+        SizedBox(height: AppSize.h16),
         TextFormField(
           maxLines: maxlins,
           minLines: minlins,

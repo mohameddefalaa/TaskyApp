@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -9,6 +8,7 @@ import 'package:protofilio/Features/Profile/user_detailes.dart';
 import 'package:protofilio/Features/Welcome/welcome_screen.dart';
 import 'package:protofilio/core/constants/storge_key.dart';
 import 'package:protofilio/theme/colors.dart';
+import 'package:protofilio/core/constants/app_size.dart';
 import 'package:protofilio/core/services/perfrence_manager.dart';
 import 'package:protofilio/theme/theme_controller.dart';
 
@@ -36,13 +36,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(title: Text('My Profile')),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: EdgeInsets.symmetric(horizontal: AppSize.dg16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(AppSize.dg16),
 
               child: Center(
                 child: Stack(
@@ -50,25 +50,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     CircleAvatar(
                       child: SizedBox.fromSize(
-                        size: Size.fromRadius(65),
+                        size: Size.fromRadius(AppSize.r32 * 2 + AppSize.r1),
                         child: userImage != null
                             ? Image.file(File(userImage!))
                             : SvgPicture.asset(
                                 "assets/images/person.svg",
                                 alignment: AlignmentGeometry.center,
                                 fit: BoxFit.contain,
-
-                                height: 85,
-                                width: 85,
+                                height:
+                                    AppSize.h40 * 2 + AppSize.h4 + AppSize.h1,
+                                width:
+                                    AppSize.w40 * 2 + AppSize.w4 + AppSize.w1,
                               ),
                       ),
                     ),
                     Container(
-                      height: 35,
-                      width: 35,
+                      height: AppSize.h32 + AppSize.h4 * 0.75,
+                      width: AppSize.w32 + AppSize.w4 * 0.75,
                       decoration: BoxDecoration(
                         color: AppColor.primaryDarkText,
-                        borderRadius: BorderRadius.circular(32),
+                        borderRadius: BorderRadius.circular(AppSize.r32),
                       ),
                       child: Center(
                         child: IconButton(
@@ -92,7 +93,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
 
-            const SizedBox(height: 8),
+            SizedBox(height: AppSize.h8),
             Align(
               alignment: AlignmentGeometry.center,
               child: Text(
@@ -139,7 +140,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 },
                 icon: Icon(
                   Icons.arrow_forward,
-                  size: 24, // نفس المقاس اللي في الصورة (14x14)
+                  size: AppSize.r24, // نفس المقاس اللي في الصورة (14x14)
                 ),
               ),
             ),
@@ -184,7 +185,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 },
                 icon: Icon(
                   Icons.arrow_forward,
-                  size: 24, // نفس المقاس اللي في الصورة (14x14)
+                  size: AppSize.r24, // نفس المقاس اللي في الصورة (14x14)
                 ),
               ),
             ),
@@ -226,7 +227,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           children: [
             SimpleDialogOption(
-              padding: EdgeInsets.all(16),
+              padding: EdgeInsets.all(AppSize.dg16),
               onPressed: () async {
                 Navigator.pop(context);
                 XFile? image = await ImagePicker().pickImage(
@@ -239,13 +240,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Row(
                 children: [
                   Icon(Icons.camera_alt),
-                  const SizedBox(width: 10),
+                  SizedBox(width: AppSize.w8 + AppSize.w1 * 2),
                   Text('Camera'),
                 ],
               ),
             ),
             SimpleDialogOption(
-              padding: EdgeInsets.all(16),
+              padding: EdgeInsets.all(AppSize.dg16),
               onPressed: () async {
                 Navigator.pop(context);
                 XFile? image = await ImagePicker().pickImage(
@@ -259,7 +260,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Row(
                 children: [
                   Icon(Icons.photo_library),
-                  const SizedBox(width: 10),
+                  SizedBox(width: AppSize.w8 + AppSize.w1 * 2),
                   Text('Gallery '),
                 ],
               ),

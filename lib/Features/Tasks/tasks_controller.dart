@@ -52,6 +52,7 @@ class TasksController with ChangeNotifier {
     _saveTasks();
 
     notifyListeners();
+    calculatepercentage();
   }
 
   void refreshTasks() {

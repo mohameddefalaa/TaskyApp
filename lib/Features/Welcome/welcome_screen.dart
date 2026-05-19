@@ -6,7 +6,7 @@ import 'package:protofilio/core/constants/storge_key.dart';
 import 'package:protofilio/core/services/perfrence_manager.dart';
 import 'package:protofilio/core/widgets/custome_button.dart';
 import 'package:protofilio/Features/Home/components/custome_svg.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:protofilio/core/constants/app_size.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -42,7 +42,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         body: Padding(
-          padding: EdgeInsets.symmetric(vertical: 8.dg, horizontal: 16.dg),
+          padding: EdgeInsets.symmetric(
+            vertical: AppSize.dg8,
+            horizontal: AppSize.dg16,
+          ),
           child: SingleChildScrollView(
             child: Form(
               key: _namekey,
@@ -59,14 +62,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       // ),
                       CustomeSvg(
                         path: 'assets/images/AppLogo.svg',
-                        height: 42.h,
-                        width: 42.w,
+                        height: AppSize.h40 + AppSize.h4 * 0.5,
+                        width: AppSize.w40 + AppSize.w4 * 0.5,
                       ),
-                      SizedBox(width: 16.w),
+                      SizedBox(width: AppSize.w16),
                       Text("Tasky", style: TextTheme.of(context).displayMedium),
                     ],
                   ),
-                  SizedBox(height: 108.h),
+                  SizedBox(height: AppSize.h40 * 2.7),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -76,25 +79,25 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                       CustomeSvg.withoutcolor(
                         path: "assets/images/waving-hand.svg",
-                        height: 28.h,
-                        width: 28.w,
+                        height: AppSize.h28,
+                        width: AppSize.w28,
                       ),
                     ],
                   ),
-                  SizedBox(height: 8.h),
+                  SizedBox(height: AppSize.h8),
                   Text(
                     "Your productivity journey starts here.",
                     style: TextTheme.of(
                       context,
-                    ).displaySmall!.copyWith(fontSize: 16.sp),
+                    ).displaySmall!.copyWith(fontSize: AppSize.sp16),
                   ),
-                  SizedBox(height: 24.h),
+                  SizedBox(height: AppSize.h24),
                   SvgPicture.asset(
                     "assets/images/pana.svg",
-                    height: 204.39.h,
-                    width: 215.w,
+                    height: AppSize.h40 * 5.1,
+                    width: AppSize.w40 * 5.375,
                   ),
-                  SizedBox(height: 28.h),
+                  SizedBox(height: AppSize.h28),
                   Align(
                     alignment: AlignmentGeometry.centerLeft,
                     child: Text(
@@ -102,7 +105,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       style: TextTheme.of(context).titleMedium,
                     ),
                   ),
-                  SizedBox(height: 8.h),
+                  SizedBox(height: AppSize.h8),
 
                   TextFormField(
                     decoration: InputDecoration(hintText: 'ex;Mohamed Ismail'),
@@ -114,7 +117,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     },
                     controller: nameController,
                   ),
-                  SizedBox(height: 24.h),
+                  SizedBox(height: AppSize.h24),
                   CustomeButton(
                     icon: SizedBox(),
                     title: 'Let’s Get Started',
@@ -142,7 +145,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w300,
-                                fontSize: 16.sp,
+                                fontSize: AppSize.sp16,
                               ),
                             ),
                           ),
