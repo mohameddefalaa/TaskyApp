@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:protofilio/Models/task_model.dart';
 import 'package:protofilio/core/constants/storge_key.dart';
-import 'package:protofilio/core/services/perfrence_manager.dart';
+import 'package:protofilio/core/services/file_storage_manger.dart';
 
 class AddTaskController with ChangeNotifier {
   TextEditingController nameController = TextEditingController();
@@ -21,11 +21,9 @@ class AddTaskController with ChangeNotifier {
   void addTask(BuildContext context) async {
     if (key.currentState?.validate() ?? false) {
       //    final pref = await SharedPreferences.getInstance();
-      final jsonlist = PerfrenceManager().getstring(StorgeKey.tasksdata);
+      await FileStorageManger().loadData();
       List<dynamic> taskslist = [];
-      if (jsonlist != null) {
-        taskslist = jsonDecode(jsonlist);
-      }
+
       TaskModel model = TaskModel(
         id: taskslist.length + 1,
         taskName: nameController.value.text,
@@ -35,14 +33,11 @@ class AddTaskController with ChangeNotifier {
         taskDate: selectedDate,
       );
       taskslist.add(model.toJson());
-      final dynamic taasksData = jsonEncode(taskslist);
 
-      await PerfrenceManager().setstring(StorgeKey.tasksdata, taasksData).then((
-        value,
-      ) {
-        Navigator.of(context).pop(true);
-        notifyListeners();
-      });
+      await FileStorageManger().saveTasks(taskslist);
+
+      Navigator.of(context).pop(true);
+      notifyListeners();
     }
   }
 

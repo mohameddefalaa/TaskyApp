@@ -1,9 +1,7 @@
-import 'dart:convert';
-
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:protofilio/Models/task_model.dart';
-import 'package:protofilio/core/constants/storge_key.dart';
-import 'package:protofilio/core/services/perfrence_manager.dart';
+import 'package:protofilio/core/services/file_storage_manger.dart';
 
 class TasksController with ChangeNotifier {
   List<TaskModel> tasksList = [];
@@ -24,17 +22,16 @@ class TasksController with ChangeNotifier {
       tasksList.where((e) => e.isHighpreority).toList();
   Future<void> _loadtasks() async {
     //final pref = await SharedPreferences.getInstance();
-    final decodingTask = PerfrenceManager().getstring(StorgeKey.tasksdata);
     //final decodingTask = pref.getString("taasksData");
-    if (decodingTask != null) {
-      final finalDecodingTask = jsonDecode(decodingTask) as List<dynamic>;
-      tasksList = finalDecodingTask.map((toElement) {
-        return TaskModel.fromjson(toElement);
-      }).toList();
-      calculatepercentage();
 
-      notifyListeners();
-    }
+    final taskslist = await FileStorageManger().loadData();
+    log(taskslist.toString());
+    tasksList = taskslist.map((toElement) {
+      return TaskModel.fromjson(toElement);
+    }).toList();
+    calculatepercentage();
+
+    notifyListeners();
   }
 
   void toggleTaskStatus(TaskModel task, bool status) async {
@@ -62,10 +59,7 @@ class TasksController with ChangeNotifier {
 
   Future<void> _saveTasks() async {
     final jsonUpdate = tasksList.map((e) => e.toJson()).toList();
-    await PerfrenceManager().setstring(
-      StorgeKey.tasksdata,
-      jsonEncode(jsonUpdate),
-    );
+    await FileStorageManger().saveTasks(jsonUpdate);
   }
 
   void calculatepercentage() {

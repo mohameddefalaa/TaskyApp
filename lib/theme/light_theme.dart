@@ -59,6 +59,7 @@ ThemeData lightTheme = ThemeData(
       fixedSize: Size(double.infinity, AppSize.h40),
       foregroundColor: Colors.transparent,
       backgroundColor: AppColor.primaryColor,
+      minimumSize: Size.fromHeight(AppSize.h40),
     ),
   ),
   textButtonTheme: TextButtonThemeData(

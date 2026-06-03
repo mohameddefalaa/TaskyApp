@@ -73,6 +73,7 @@ class _UserDetailesState extends State<UserDetailes> {
                   title: 'Motivation Quote',
                 ),
                 SizedBox(height: AppSize.h20),
+
                 CustomeButton(
                   icon: SizedBox(),
                   title: 'Save Changes',
