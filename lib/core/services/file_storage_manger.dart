@@ -1,30 +1,32 @@
-import 'dart:convert';
-import 'dart:io';
+import 'package:hive_ce_flutter/adapters.dart';
+import 'package:protofilio/Models/task_model.dart';
 
-import 'package:path_provider/path_provider.dart';
+class HiveStorageManger {
+  static final HiveStorageManger _instance = HiveStorageManger._();
 
-class FileStorageManger {
-  static final FileStorageManger _instance = FileStorageManger._();
+  HiveStorageManger._() {}
 
-  FileStorageManger._() {}
-
-  factory FileStorageManger() {
+  factory HiveStorageManger() {
     return _instance;
   }
-  late final appDocumentDirectory;
-  late final File fileTasks;
+  late Box _tasksbox;
   Future<void> init() async {
-    appDocumentDirectory = await getApplicationDocumentsDirectory();
-    fileTasks = File("${appDocumentDirectory.path}/tasks.json");
+    await Hive.initFlutter();
+    Hive.registerAdapter(TaskModelAdapter());
+    await Hive.openBox<TaskModel>("Tasks");
+    _tasksbox = Hive.box<TaskModel>("Tasks");
   }
 
-  saveTasks(List<dynamic> list) async {
-    final tasksencode = jsonEncode(list);
-    await fileTasks.writeAsString(tasksencode);
+  saveTasks(List<TaskModel> list) async {
+    await _tasksbox.clear(); // 👈 السطر ده إجباري طالما هتستخدم addAll
+    await _tasksbox.addAll(list);
   }
 
-  Future<List<dynamic>> loadData() async {
-    final tasksjson = await fileTasks.readAsString();
-    return jsonDecode(tasksjson) as List<dynamic>;
+  List<TaskModel> loadData() {
+    return _tasksbox.values.cast<TaskModel>().toList();
+  }
+
+  clear() async {
+    await _tasksbox.clear();
   }
 }

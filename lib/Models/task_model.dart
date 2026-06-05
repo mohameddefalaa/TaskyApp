@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:hive_ce_flutter/hive_ce_flutter.dart';
+part 'task_model.g.dart';
 
+@HiveType(typeId: 0)
 class TaskModel {
+  @HiveField(0)
   int id;
+  @HiveField(1)
   String taskName;
+  @HiveField(2)
   String taskDesc;
+  @HiveField(3)
   bool isHighpreority;
+  @HiveField(4)
   bool iSDONE;
+  @HiveField(5)
   DateTime taskDate;
+  @HiveField(6)
   TimeOfDay taskTime;
   TaskModel({
     required this.id,

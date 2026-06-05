@@ -24,11 +24,8 @@ class TasksController with ChangeNotifier {
     //final pref = await SharedPreferences.getInstance();
     //final decodingTask = pref.getString("taasksData");
 
-    final taskslist = await FileStorageManger().loadData();
-    log(taskslist.toString());
-    tasksList = taskslist.map((toElement) {
-      return TaskModel.fromjson(toElement);
-    }).toList();
+    tasksList = HiveStorageManger().loadData();
+
     calculatepercentage();
 
     notifyListeners();
@@ -58,8 +55,7 @@ class TasksController with ChangeNotifier {
   }
 
   Future<void> _saveTasks() async {
-    final jsonUpdate = tasksList.map((e) => e.toJson()).toList();
-    await FileStorageManger().saveTasks(jsonUpdate);
+    await HiveStorageManger().saveTasks(tasksList);
   }
 
   void calculatepercentage() {

@@ -14,7 +14,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PerfrenceManager().init();
-  await FileStorageManger().init();
+  await HiveStorageManger().init();
   ThemeController().init();
   String? username = PerfrenceManager().getstring(StorgeKey.username);
   runApp(TaskyApp(username: username));

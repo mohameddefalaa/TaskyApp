@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:hive_ce_flutter/adapters.dart';
 import 'package:protofilio/Models/task_model.dart';
 import 'package:protofilio/core/constants/storge_key.dart';
+import 'package:protofilio/core/services/file_storage_manger.dart';
 import 'package:protofilio/core/services/perfrence_manager.dart';
 import 'package:protofilio/core/widgets/custome_button.dart';
 import 'package:protofilio/core/widgets/custome_text_filed.dart';
@@ -103,14 +105,8 @@ Future<bool?> showmodelbuttomsheet(BuildContext context, TaskModel model) {
 
                     onPressed: () async {
                       if (key.currentState?.validate() ?? false) {
-                        //    final pref = await SharedPreferences.getInstance();
-                        final jsonlist = PerfrenceManager().getstring(
-                          StorgeKey.tasksdata,
-                        );
-                        List<dynamic> taskslist = [];
-                        if (jsonlist != null) {
-                          taskslist = jsonDecode(jsonlist);
-                        }
+                        List<TaskModel> taskslist = HiveStorageManger()
+                            .loadData();
                         TaskModel newModel = TaskModel(
                           id: model.id,
                           taskName: nameController.value.text,
@@ -119,20 +115,15 @@ Future<bool?> showmodelbuttomsheet(BuildContext context, TaskModel model) {
                           taskTime: TimeOfDay.now(),
                           taskDate: DateTime.now(),
                         );
-                        final item = taskslist.firstWhere(
-                          (e) => e['id'] == model.id,
+                        final int index = taskslist.indexWhere(
+                          (e) => e.id == model.id,
                         );
-                        final int index = taskslist.indexOf(item);
-                        taskslist[index] = newModel.toJson();
-
-                        final dynamic taasksData = jsonEncode(taskslist);
-
-                        await PerfrenceManager().setstring(
-                          StorgeKey.tasksdata,
-                          taasksData,
-                        );
-                        if (context.mounted) {
-                          Navigator.pop(context, true);
+                        if (index != -1) {
+                          taskslist[index] = newModel;
+                          await HiveStorageManger().saveTasks(taskslist);
+                          if (context.mounted) {
+                            Navigator.pop(context, true);
+                          }
                         }
                       }
                     },

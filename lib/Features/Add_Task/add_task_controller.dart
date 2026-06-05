@@ -1,8 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:hive_ce_flutter/adapters.dart';
 import 'package:protofilio/Models/task_model.dart';
-import 'package:protofilio/core/constants/storge_key.dart';
 import 'package:protofilio/core/services/file_storage_manger.dart';
 
 class AddTaskController with ChangeNotifier {
@@ -21,8 +19,7 @@ class AddTaskController with ChangeNotifier {
   void addTask(BuildContext context) async {
     if (key.currentState?.validate() ?? false) {
       //    final pref = await SharedPreferences.getInstance();
-      await FileStorageManger().loadData();
-      List<dynamic> taskslist = [];
+      final List<TaskModel> taskslist = HiveStorageManger().loadData();
 
       TaskModel model = TaskModel(
         id: taskslist.length + 1,
@@ -32,9 +29,9 @@ class AddTaskController with ChangeNotifier {
         taskTime: selectedtime,
         taskDate: selectedDate,
       );
-      taskslist.add(model.toJson());
+      taskslist.add(model);
 
-      await FileStorageManger().saveTasks(taskslist);
+      await HiveStorageManger().saveTasks(taskslist);
 
       Navigator.of(context).pop(true);
       notifyListeners();
